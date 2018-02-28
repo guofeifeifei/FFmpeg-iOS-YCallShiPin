@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -16,9 +16,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    // 控制点击背景是否收起键盘
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    // 不显示自定义键盘头部
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    // 控制键盘上的工具条文字颜色是否用户自定义
+    [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = YES;
+    [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor whiteColor];
     return YES;
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -26,11 +34,6 @@
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
 
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
